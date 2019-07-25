@@ -82,26 +82,16 @@ public class Habitabilidad {
                 }
             }
         }
-        
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 3; j++) {
-                System.out.print(matrizDestacadas[i][j]+" ");
-            }
-            System.out.println("");
-        }
 
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
-                verificaAdyacencia(i, j);
+                if(matrizDestacadas[i][j] != 0.0){
+                    verificaAdyacencia(i, j);
+                }
             }
         }
         
-        for (int i = 0; i < 9; i++) {
-            for (int j = 0; j < 9; j++) {
-                System.out.print(matrizAdyacencia[i][j]+" ");
-            }
-            System.out.println("");
-        }
+        System.out.println(pa47);
 
     }
 
