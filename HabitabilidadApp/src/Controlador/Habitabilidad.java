@@ -29,6 +29,13 @@ public class Habitabilidad {
     {0, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 0, 0, 0}};
+    
+    //0 es vacio, 1 es habitacion, 2 es pared, U es hueco
+    public String[][] matrizMapa = {{"V","V","V","V","V","V","V"},
+        {"V","H","P","H","P","H","V"},
+        {"V","P","V","P","V","P","V"},
+        {"V","H","P","H","P","H","V"},
+    };
 
     public int[][] matrizNumHabitaciones = {{0, 1, 2},
     {3, 4, 5},
