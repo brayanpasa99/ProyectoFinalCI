@@ -6,6 +6,7 @@
 package Controlador;
 
 import Modelo.*;
+import java.util.Hashtable;
 
 /**
  *
@@ -19,7 +20,7 @@ public class Habitabilidad {
 
     public float[][] matrizPromedios = new float[3][3];
     public float[][] matrizDestacadas = new float[3][3];
-    public float[][] matrizAdyacencia = {{0, 0, 0, 0, 0, 0, 0, 0, 0},
+    public double[][] matrizAdyacencia = {{0, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -33,9 +34,15 @@ public class Habitabilidad {
     {3, 4, 5},
     {6, 7, 8}};
 
+    public String[][] arrayParedes = new String[10][10];
+
     public double rtHab1_2, rtHab1_4, rtHab2_1, rtHab2_5, rtHab1_5,
             rtHab2, rtHab3, rtHab4, rtHab5, rtHab6, rtHab7, rtHab8, rtHab9;
     public double tlHab1, tlHab2, tlHab3, tlHab4, tlHab5, tlHab6, tlHab7, tlHab8, tlHab9;
+
+    //Medido en kg/m2
+    Hashtable<String, Integer> masas = new Hashtable<>();
+    public double hz = 1000;
 
     public Habitabilidad(Habitacion hab1, Habitacion hab2, Habitacion hab3, Habitacion hab4, Habitacion hab5, Habitacion hab6, Habitacion hab7, Habitacion hab8, Habitacion hab9, Pared pa12, Pared pa23, Pared pa45, Pared pa56, Pared pa78, Pared pa89, Pared pa14, Pared pa25, Pared pa36, Pared pa47, Pared pa58, Pared pa69) {
         this.hab1 = hab1;
@@ -60,6 +67,32 @@ public class Habitabilidad {
         this.pa47 = pa47;
         this.pa58 = pa58;
         this.pa69 = pa69;
+
+        for (int i = 1; i < 10; i++) {
+            for (int j = 1; j < 10; j++) {
+                this.arrayParedes[i-1][j-1] = "";
+            }
+        }
+
+        this.arrayParedes[1][2] = pa12.getMaterial();
+        this.arrayParedes[2][3] = pa23.getMaterial();
+        this.arrayParedes[4][5] = pa45.getMaterial();
+        this.arrayParedes[5][6] = pa56.getMaterial();
+        this.arrayParedes[7][8] = pa78.getMaterial();
+        this.arrayParedes[8][9] = pa89.getMaterial();
+        this.arrayParedes[1][4] = pa14.getMaterial();
+        this.arrayParedes[2][5] = pa25.getMaterial();
+        this.arrayParedes[3][6] = pa36.getMaterial();
+        this.arrayParedes[4][7] = pa47.getMaterial();
+        this.arrayParedes[5][8] = pa58.getMaterial();
+        this.arrayParedes[6][9] = pa69.getMaterial();
+
+        masas.put("Hormigon", 250);
+        masas.put("Madera", 18);
+        masas.put("Ladrillo", 300);
+        masas.put("",0);
+
+        pa58.getMaterial();
     }
 
     public void destacarOrigen() {
@@ -83,16 +116,21 @@ public class Habitabilidad {
             }
         }
 
-        for (int i = 0; i < 3; i++) {
+        /*for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
-                if(matrizDestacadas[i][j] != 0.0){
-                    verificaAdyacencia(i, j);
-                }
+                verificaAdyacencia(i, j);
             }
-        }
+        }*/
         
-        System.out.println(pa47);
+        verificaAdyacencia(0, 1);
 
+        System.out.println("Matriz de adyacencia");
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                System.out.print(matrizAdyacencia[i][j] + " ");
+            }
+            System.out.println("");
+        }
     }
 
     public void calcularRuidoTransmitido() {
@@ -100,11 +138,21 @@ public class Habitabilidad {
     }
 
     public double ruidoTransmitido(double TL, double ruidoOrigen) {
+        
+        if (TL==0){
+            return 0;
+        }
+        
         double W = ((ruidoOrigen) / Math.pow(10, (TL / 10)));
         return W;
     }
 
-    public double perdidaTransmision(float m, float hz) {
+    public double perdidaTransmision(double m, double hz) {
+        
+        if (m==0){
+            return 0;
+        }
+        
         double TL = (20 * Math.log10(m * hz) - 43);
         return TL;
     }
@@ -112,29 +160,70 @@ public class Habitabilidad {
     public void verificaAdyacencia(int coorI, int coorJ) {
 
         int numHabitacionCentro = matrizNumHabitaciones[coorI][coorJ];
-
+        System.out.println("Coordenadas: " + coorI + " " + coorJ);
+        //System.out.println("ArrayParedes12: " + arrayParedes[1][2]);
+        
         if (coorJ - 1 != -1) {
             int numHabitacionIzquierda = matrizNumHabitaciones[coorI][coorJ - 1];
             if (matrizDestacadas[coorI][coorJ - 1] == 1.0) {
-                matrizAdyacencia[numHabitacionCentro][numHabitacionIzquierda] = 1;
+                /*System.out.println("1er if");
+                System.out.println("Num Hab: " + numHabitacionCentro + " " + numHabitacionIzquierda);
+                
+                System.out.println("Matriz promedios en " + coorI + "," + (coorJ-1) + ":" + matrizPromedios[coorI][coorJ]);
+                System.out.println("ArrayParedes: " + arrayParedes[coorI][coorJ - 1]);
+                
+                System.out.println("Masas en "+ coorI + "," + (coorJ-1) + ":" + masas.get(arrayParedes[coorI][coorJ - 1]));
+                System.out.println("Perdida de transmision: " + perdidaTransmision(masas.get(arrayParedes[coorI][coorJ - 1]), hz));
+                System.out.println("Ruido Transmitido: " + ruidoTransmitido(perdidaTransmision(masas.get(arrayParedes[coorI][coorJ - 1]), hz), matrizPromedios[coorI][coorJ - 1]));*/
+                System.out.println("MATRIZ PROMEDIOS"+perdidaTransmision(masas.get(arrayParedes[coorI][coorJ]), hz)+" "+arrayParedes[coorI][coorJ]);
+                
+                matrizAdyacencia[numHabitacionCentro][numHabitacionIzquierda] = ruidoTransmitido(perdidaTransmision(masas.get(arrayParedes[coorI][coorJ]), hz), matrizPromedios[coorI][coorJ]);
+
             }
         }
         if (coorJ + 1 != 3) {
             int numHabitacionDerecha = matrizNumHabitaciones[coorI][coorJ + 1];
             if (matrizDestacadas[coorI][coorJ + 1] == 1.0) {
-                matrizAdyacencia[numHabitacionCentro][numHabitacionDerecha] = 1;
+                System.out.println("2do if");
+                System.out.println("Num Hab: " + numHabitacionCentro + " " + numHabitacionDerecha);
+                
+                System.out.println("Matriz promedios en " + coorI + "," + (coorJ+1) + ":" + matrizPromedios[coorI][coorJ + 1]);
+                System.out.println("ArrayParedes: " + arrayParedes[coorI][coorJ + 1]);
+                System.out.println("Masas en "+ coorI + "," + (coorJ+1) + ":" + masas.get(arrayParedes[coorI][coorJ +1]));
+                System.out.println("Perdida de transmision: " + perdidaTransmision(masas.get(arrayParedes[coorI][coorJ +1]), hz));
+                System.out.println("Ruido Transmitido: " + ruidoTransmitido(perdidaTransmision(masas.get(arrayParedes[coorI][coorJ +1]), hz), matrizPromedios[coorI][coorJ +1]));
+                
+                matrizAdyacencia[numHabitacionCentro][numHabitacionDerecha] = ruidoTransmitido(perdidaTransmision(masas.get(arrayParedes[coorI][coorJ + 1]), hz), matrizPromedios[coorI][coorJ + 1]);;
             }
         }
         if (coorI - 1 != -1) {
             int numHabitacionArriba = matrizNumHabitaciones[coorI - 1][coorJ];
             if (matrizDestacadas[coorI - 1][coorJ] == 1.0) {
-                matrizAdyacencia[numHabitacionCentro][numHabitacionArriba] = 1;
+                System.out.println("3er if");
+                System.out.println("Num Hab: " + numHabitacionCentro + " " + numHabitacionArriba);
+                
+                System.out.println("Matriz promedios en " + (coorI-1) + "," + (coorJ) + ":" + matrizPromedios[coorI-1][coorJ]);
+                System.out.println("ArrayParedes: " + arrayParedes[coorI-1][coorJ]);
+                System.out.println("Masas en "+ (coorI-1) + "," + (coorJ) + ":" + masas.get(arrayParedes[coorI-1][coorJ]));
+                System.out.println("Perdida de transmision: " + perdidaTransmision(masas.get(arrayParedes[coorI-1][coorJ]), hz));
+                System.out.println("Ruido Transmitido: " + ruidoTransmitido(perdidaTransmision(masas.get(arrayParedes[coorI-1][coorJ]), hz), matrizPromedios[coorI-1][coorJ]));
+                
+                matrizAdyacencia[numHabitacionCentro][numHabitacionArriba] = ruidoTransmitido(perdidaTransmision(masas.get(arrayParedes[coorI - 1][coorJ]), hz), matrizPromedios[coorI - 1][coorJ]);;
             }
         }
         if (coorI + 1 != 3) {
             int numHabitacionAbajo = matrizNumHabitaciones[coorI + 1][coorJ];
             if (matrizDestacadas[coorI + 1][coorJ] == 1.0) {
-                matrizAdyacencia[numHabitacionCentro][numHabitacionAbajo] = 1;
+                System.out.println("4to if");
+                System.out.println("Num Hab: " + numHabitacionCentro + " " + numHabitacionAbajo);
+                
+                System.out.println("Matriz promedios en " + (coorI+1) + "," + (coorJ) + ":" + matrizPromedios[coorI+1][coorJ]);
+                System.out.println("ArrayParedes: " + arrayParedes[coorI+1][coorJ]);
+                System.out.println("Masas en "+ (coorI+1) + "," + (coorJ) + ":" + masas.get(arrayParedes[coorI+1][coorJ]));
+                System.out.println("Perdida de transmision: " + perdidaTransmision(masas.get(arrayParedes[coorI+1][coorJ]), hz));
+                System.out.println("Ruido Transmitido: " + ruidoTransmitido(perdidaTransmision(masas.get(arrayParedes[coorI+1][coorJ]), hz), matrizPromedios[coorI+1][coorJ]));
+                
+                matrizAdyacencia[numHabitacionCentro][numHabitacionAbajo] = ruidoTransmitido(perdidaTransmision(masas.get(arrayParedes[coorI + 1][coorJ]), hz), matrizPromedios[coorI + 1][coorJ]);;
             }
         }
     }

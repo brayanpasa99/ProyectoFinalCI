@@ -249,7 +249,7 @@ public class CreadorBotones implements ActionListener{
         
         tipoPared = new JComboBox();
         tipoPared.setBounds(25, 40, 200, 20);
-        tipoPared.addItem("Marmol");
+        tipoPared.addItem("Hormigon");
         tipoPared.addItem("Madera");
         tipoPared.addItem("Ladrillo");
         tipoPared.setVisible(true);
@@ -521,8 +521,8 @@ public class CreadorBotones implements ActionListener{
             String materialSeleccionado = tipoPared.getSelectedItem().toString();
             Color c = Color.white;
             switch(materialSeleccionado){
-                case "Marmol":
-                    c = new Color(255, 252, 240);
+                case "Hormigon":
+                    c = new Color(104, 108, 94);
                     break;
                 case "Madera":
                     c = new Color(223, 154, 79);
