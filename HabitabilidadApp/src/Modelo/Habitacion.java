@@ -119,10 +119,10 @@ public class Habitacion {
                     this.promedioOrigen = 40;
                     break;
                 case "Salon de eventos":
-                    this.promedioOrigen = 100;
+                    this.promedioOrigen = 80;
                     break;
                 case "Oficina de negocios":
-                    this.promedioOrigen = 70;
+                    this.promedioOrigen = 40;
                     break;
             }
         }
@@ -133,30 +133,30 @@ public class Habitacion {
         switch (op) {
             //Residencial
             case "Biblioteca":
-                this.ruidoMax = 30;
+                this.ruidoMax = 35;
                 break;
             case "Dormitorio":
-                this.ruidoMax = 35;
+                this.ruidoMax = 40;
                 break;
             case "Cocina":
-                this.ruidoMax = 35;
+                this.ruidoMax = 55;
                 break;
             case "Baño":
-                this.ruidoMax = 35;
+                this.ruidoMax = 55;
                 break;
             case "Sala":
-                this.ruidoMax = 40;
+                this.ruidoMax = 65;
                 break;
 
             //Empresarial y de Ocio
             case "Oficina":
-                this.ruidoMax = 40;
+                this.ruidoMax = 65;
                 break;
             case "Salon de eventos":
-                this.ruidoMax = 100;
+                this.ruidoMax = 110;
                 break;
             case "Oficina de negocios":
-                this.ruidoMax = 70;
+                this.ruidoMax = 65;
                 break;
         }
     }

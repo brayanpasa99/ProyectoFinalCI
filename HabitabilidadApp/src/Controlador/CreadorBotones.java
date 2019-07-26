@@ -39,6 +39,10 @@ public class CreadorBotones implements ActionListener{
     int iHabSelecc;
     int iParSelecc;
     
+    double[] maximoHabitaciones = {0,0,0,0,0,0,0,0,0};
+    double[] nivelEstimado = {0,0,0,0,0,0,0,0,0};
+    String[] veredicto = {"","","","","","","","",""};
+    
     public JPanel Habitaciones(){
         
         JPanel Panel = new JPanel();
@@ -67,6 +71,8 @@ public class CreadorBotones implements ActionListener{
         btPa12.setVisible(true);
         btPa12.addActionListener(this);
         Panel.add(btPa12);
+        
+        System.out.println(pa12.getMaterial());
         
         pa23 = new Pared(2,3);
         btPa23 = pa23.getBoton();
@@ -267,7 +273,7 @@ public class CreadorBotones implements ActionListener{
     public JPanel TablaUsos(){
         JPanel Panel = new JPanel();
         Panel.setLayout(null);
-        Panel.setBounds(40, 450, 500, 340);
+        Panel.setBounds(40, 450, 700, 340);
         
         lbTituloTabla = new JLabel();
         lbTituloTabla.setText("Informacion por habitacion");
@@ -280,22 +286,24 @@ public class CreadorBotones implements ActionListener{
         tbHabitacionesUsos.setModel(model);
         model.addColumn("Habitaciones");
         model.addColumn("Usos");
-        model.addColumn("db Estimados");
-        model.addRow(new Object[]{"Habitaciones", "Usos", "Promedio de db"});
-        model.addRow(new Object[]{hab1.getStNombreHabitacion(), hab1.getUso(), hab1.getPromedioOrigen()});
-        model.addRow(new Object[]{hab2.getStNombreHabitacion(), hab2.getUso(), hab2.getPromedioOrigen()});
-        model.addRow(new Object[]{hab3.getStNombreHabitacion(), hab3.getUso(), hab3.getPromedioOrigen()});
-        model.addRow(new Object[]{hab4.getStNombreHabitacion(), hab4.getUso(), hab4.getPromedioOrigen()});
-        model.addRow(new Object[]{hab5.getStNombreHabitacion(), hab5.getUso(), hab5.getPromedioOrigen()});
-        model.addRow(new Object[]{hab6.getStNombreHabitacion(), hab6.getUso(), hab6.getPromedioOrigen()});
-        model.addRow(new Object[]{hab7.getStNombreHabitacion(), hab7.getUso(), hab7.getPromedioOrigen()});
-        model.addRow(new Object[]{hab8.getStNombreHabitacion(), hab8.getUso(), hab8.getPromedioOrigen()});
-        model.addRow(new Object[]{hab9.getStNombreHabitacion(), hab9.getUso(), hab9.getPromedioOrigen()});
+        model.addColumn("db Promedio");
+        model.addColumn("Maximo");
+        model.addColumn("Nivel estimado");
+        model.addRow(new Object[]{"Habitaciones", "Usos", "Promedio de db", "Maximo de db", "Nivel estimado"});
+        model.addRow(new Object[]{hab1.getStNombreHabitacion(), hab1.getUso(), hab1.getPromedioOrigen(), maximoHabitaciones[0], nivelEstimado[0]});
+        model.addRow(new Object[]{hab2.getStNombreHabitacion(), hab2.getUso(), hab2.getPromedioOrigen(), maximoHabitaciones[1], nivelEstimado[1]});
+        model.addRow(new Object[]{hab3.getStNombreHabitacion(), hab3.getUso(), hab3.getPromedioOrigen(), maximoHabitaciones[2], nivelEstimado[2]});
+        model.addRow(new Object[]{hab4.getStNombreHabitacion(), hab4.getUso(), hab4.getPromedioOrigen(), maximoHabitaciones[3], nivelEstimado[3]});
+        model.addRow(new Object[]{hab5.getStNombreHabitacion(), hab5.getUso(), hab5.getPromedioOrigen(), maximoHabitaciones[4], nivelEstimado[4]});
+        model.addRow(new Object[]{hab6.getStNombreHabitacion(), hab6.getUso(), hab6.getPromedioOrigen(), maximoHabitaciones[5], nivelEstimado[5]});
+        model.addRow(new Object[]{hab7.getStNombreHabitacion(), hab7.getUso(), hab7.getPromedioOrigen(), maximoHabitaciones[6], nivelEstimado[6]});
+        model.addRow(new Object[]{hab8.getStNombreHabitacion(), hab8.getUso(), hab8.getPromedioOrigen(), maximoHabitaciones[7], nivelEstimado[7]});
+        model.addRow(new Object[]{hab9.getStNombreHabitacion(), hab9.getUso(), hab9.getPromedioOrigen(), maximoHabitaciones[8], nivelEstimado[8]});
         
         tbHabitacionesUsos.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         tbHabitacionesUsos.getTableHeader().setReorderingAllowed(false);
         
-        tbHabitacionesUsos.setBounds(25, 25, 410, 160);
+        tbHabitacionesUsos.setBounds(25, 25, 620, 160);
         tbHabitacionesUsos.setVisible(true);
         Panel.add(tbHabitacionesUsos);
         
@@ -381,64 +389,82 @@ public class CreadorBotones implements ActionListener{
                 case 1:
                     hab1.setUso(tipoEspacio.getSelectedItem().toString());
                     hab1.establecerPromedio();
+                    hab1.establecerMaximo();
                     tbHabitacionesUsos.setValueAt(hab1.getUso(), 1, 1);
                     tbHabitacionesUsos.setValueAt(hab1.getPromedioOrigen(), 1, 2);
+                    tbHabitacionesUsos.setValueAt(hab1.getRuidoMax(), 1, 3);
                     System.out.println("Uso de la habitacion 1: " + hab1.getUso());
                     break;
                 case 2:
                     hab2.setUso(tipoEspacio.getSelectedItem().toString());
                     hab2.establecerPromedio();
+                    hab2.establecerMaximo();
                     tbHabitacionesUsos.setValueAt(hab2.getUso(), 2, 1);
                     tbHabitacionesUsos.setValueAt(hab2.getPromedioOrigen(), 2, 2);
+                    tbHabitacionesUsos.setValueAt(hab2.getRuidoMax(), 2, 3);
                     System.out.println("Uso de la habitacion 2: " + hab2.getUso());
                     break;
                 case 3:
                     hab3.setUso(tipoEspacio.getSelectedItem().toString());
                     hab3.establecerPromedio();
+                    hab3.establecerMaximo();
                     tbHabitacionesUsos.setValueAt(hab3.getPromedioOrigen(), 3, 2);
                     tbHabitacionesUsos.setValueAt(hab3.getUso(), 3, 1);
+                    tbHabitacionesUsos.setValueAt(hab3.getRuidoMax(), 3, 3);
                     System.out.println("Uso de la habitacion 3: " + hab3.getUso());
                     break;
                 case 4:
                     hab4.setUso(tipoEspacio.getSelectedItem().toString());
                     hab4.establecerPromedio();
+                    hab4.establecerMaximo();
                     tbHabitacionesUsos.setValueAt(hab4.getPromedioOrigen(), 4, 2);
                     tbHabitacionesUsos.setValueAt(hab4.getUso(), 4, 1);
+                    tbHabitacionesUsos.setValueAt(hab4.getRuidoMax(), 4, 3);
                     System.out.println("Uso de la habitacion 4: " + hab4.getUso());
                     break;
                 case 5:
                     hab5.setUso(tipoEspacio.getSelectedItem().toString());
                     hab5.establecerPromedio();
+                    hab5.establecerMaximo();
                     tbHabitacionesUsos.setValueAt(hab5.getPromedioOrigen(), 5, 2);
                     tbHabitacionesUsos.setValueAt(hab5.getUso(), 5, 1);
+                    tbHabitacionesUsos.setValueAt(hab5.getRuidoMax(), 5, 3);
                     System.out.println("Uso de la habitacion 5: " + hab5.getUso());
                     break;
                 case 6:
                     hab6.setUso(tipoEspacio.getSelectedItem().toString());
                     hab6.establecerPromedio();
+                    hab6.establecerMaximo();
                     tbHabitacionesUsos.setValueAt(hab6.getPromedioOrigen(), 6, 2);
                     tbHabitacionesUsos.setValueAt(hab6.getUso(), 6, 1);
+                    tbHabitacionesUsos.setValueAt(hab6.getRuidoMax(), 6, 3);
                     System.out.println("Uso de la habitacion 6: " + hab6.getUso());
                     break;
                 case 7:
                     hab7.setUso(tipoEspacio.getSelectedItem().toString());
                     hab7.establecerPromedio();
+                    hab7.establecerMaximo();
                     tbHabitacionesUsos.setValueAt(hab7.getPromedioOrigen(), 7, 2);
                     tbHabitacionesUsos.setValueAt(hab7.getUso(), 7, 1);
+                    tbHabitacionesUsos.setValueAt(hab7.getRuidoMax(), 7, 3);
                     System.out.println("Uso de la habitacion 7: " + hab7.getUso());
                     break;
                 case 8:
                     hab8.setUso(tipoEspacio.getSelectedItem().toString());
                     hab8.establecerPromedio();
+                    hab8.establecerMaximo();
                     tbHabitacionesUsos.setValueAt(hab8.getPromedioOrigen(), 8, 2);
                     tbHabitacionesUsos.setValueAt(hab8.getUso(), 8, 1);
+                    tbHabitacionesUsos.setValueAt(hab8.getRuidoMax(), 8, 3);
                     System.out.println("Uso de la habitacion 8: " + hab8.getUso());
                     break;
                 case 9:
                     hab9.setUso(tipoEspacio.getSelectedItem().toString());
                     hab9.establecerPromedio();
+                    hab9.establecerMaximo();
                     tbHabitacionesUsos.setValueAt(hab9.getPromedioOrigen(), 9, 2);
                     tbHabitacionesUsos.setValueAt(hab9.getUso(), 9, 1);
+                    tbHabitacionesUsos.setValueAt(hab9.getRuidoMax(), 9, 3);
                     System.out.println("Uso de la habitacion 9: " + hab9.getUso());
                     break;
             }
@@ -600,9 +626,79 @@ public class CreadorBotones implements ActionListener{
         if (e.getSource()==btEnviarHabitabilidad){
             Habitabilidad evHab = new Habitabilidad(hab1, hab2, hab3, hab4, hab5, hab6, hab7, hab8, hab9, pa12, pa23, pa45, pa56, pa78, pa89, pa14, pa25, pa36, pa47, pa58, pa69);
             evHab.destacarOrigen();
-        }
-        
             
+            nivelEstimado = evHab.getArrayFinal();
+            veredicto = evHab.getArrayVeredicto();
+            
+            pintarHabitables();
+            mostrarEstimado();
+            
+        }   
     }
     
+    public void pintarHabitables(){
+        
+        if (veredicto[0].equals("Es habitable")){
+            btHabitacion1.setBackground(Color.GREEN);
+        } else {
+            btHabitacion1.setBackground(Color.red);
+        }
+        
+        if (veredicto[1].equals("Es habitable")){
+            btHabitacion2.setBackground(Color.GREEN);
+        } else {
+            btHabitacion2.setBackground(Color.red);
+        }
+        
+        if (veredicto[2].equals("Es habitable")){
+            btHabitacion3.setBackground(Color.GREEN);
+        } else {
+            btHabitacion3.setBackground(Color.red);
+        }
+        
+        if (veredicto[3].equals("Es habitable")){
+            btHabitacion4.setBackground(Color.GREEN);
+        } else {
+            btHabitacion4.setBackground(Color.red);
+        }
+        
+        if (veredicto[4].equals("Es habitable")){
+            btHabitacion5.setBackground(Color.GREEN);
+        } else {
+            btHabitacion5.setBackground(Color.red);
+        }
+        
+        if (veredicto[5].equals("Es habitable")){
+            btHabitacion6.setBackground(Color.GREEN);
+        } else {
+            btHabitacion6.setBackground(Color.red);
+        }
+        
+        if (veredicto[6].equals("Es habitable")){
+            btHabitacion7.setBackground(Color.GREEN);
+        } else {
+            btHabitacion7.setBackground(Color.red);
+        }
+        
+        if (veredicto[7].equals("Es habitable")){
+            btHabitacion8.setBackground(Color.GREEN);
+        } else {
+            btHabitacion8.setBackground(Color.red);
+        }
+        
+        if (veredicto[8].equals("Es habitable")){
+            btHabitacion9.setBackground(Color.GREEN);
+        } else {
+            btHabitacion9.setBackground(Color.red);
+        }
+    }
+    
+    public void mostrarEstimado(){
+        
+        for (int i=0;i<9;i++){
+            tbHabitacionesUsos.setValueAt(nivelEstimado[i], i+1, 4);
+        }
+        
+        
+    }
 }

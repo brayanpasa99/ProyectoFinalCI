@@ -5,6 +5,7 @@
  */
 package Modelo;
 
+import java.awt.Color;
 import javax.swing.JButton;
 
 /**
@@ -13,11 +14,12 @@ import javax.swing.JButton;
  */
 public class Pared {
     public int habitacion1, habitacion2;
-    public String material = "";
+    public String material = "Hormigon";
     public JButton boton;
 
     public Pared(int hab1, int hab2) {
         this.boton = new JButton("P");
+        this.boton.setBackground(new Color(104, 108, 94));
         this.habitacion1 = hab1;
         this.habitacion2 = hab2;
     }
