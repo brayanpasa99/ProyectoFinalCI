@@ -13,6 +13,7 @@ import javax.swing.JButton;
  * @author mateo
  */
 public class Pared {
+
     public int habitacion1, habitacion2;
     public String material = "Hormigon";
     public JButton boton;
@@ -55,9 +56,5 @@ public class Pared {
     public void setBoton(JButton boton) {
         this.boton = boton;
     }
-    
-    
-    
-    
-    
+
 }

@@ -6,9 +6,10 @@ import Modelo.*;
 import javax.swing.*;
 
 public class Principal {
+
     //Se define un JFrame global
     public static JFrame ventana;
-    
+
     //Clase principal del sistema.
     public static void main(String[] args) {
         CreadorBotones creadorBotones = new CreadorBotones();
@@ -20,7 +21,7 @@ public class Principal {
         JPanel PaTitulo = creadorBotones.Titulo();
         JPanel PaMarca = creadorBotones.Marcas();
         JPanel PaImagen = creadorBotones.Imagen();
-        
+
         ventana = new JFrame("");
 
         //Se añaden los elementos guardados en el Frame a la ventana
@@ -32,17 +33,16 @@ public class Principal {
         ventana.add(PaTitulo);
         ventana.add(PaMarca);
         ventana.add(PaImagen);
-        
+
         //Se definen las propiedades de la ventana
-        ventana.setSize(1000,750);
+        ventana.setSize(1000, 750);
         ventana.setTitle("Habitabilidad App");
         ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         ventana.setLocationRelativeTo(null);
         ventana.setLayout(null);
-        
+
         //Se muestra la ventana
         ventana.setVisible(true);
-        
+
     }
 }
-

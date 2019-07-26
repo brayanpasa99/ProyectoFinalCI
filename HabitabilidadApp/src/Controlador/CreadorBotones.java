@@ -17,56 +17,56 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author mateo
  */
-public class CreadorBotones implements ActionListener{
-    
+public class CreadorBotones implements ActionListener {
+
     JButton btHabitacion1, btHabitacion2, btHabitacion3, btHabitacion4, btHabitacion5, btHabitacion6, btHabitacion7, btHabitacion8, btHabitacion9;
     JButton btAplicarUso, btAplicarPared, btEnviarHabitabilidad;
     JComboBox tipoEspacio, tipoPared;
     JLabel lbHab, lbPar, lbTitulo, lbTituloTabla;
     JLabel lbNombres, lbImagen;
-    
+
     DefaultTableModel model;
     JTable tbHabitacionesUsos;
-    
+
     Habitacion hab1, hab2, hab3, hab4, hab5, hab6, hab7, hab8, hab9;
-    
+
     Pared pa12, pa23, pa45, pa56, pa78, pa89, pa14, pa25, pa36,
-            pa47,pa58,pa69;
-    
+            pa47, pa58, pa69;
+
     JButton btPa12, btPa23, btPa45, btPa56, btPa78, btPa89,
             btPa14, btPa25, btPa36, btPa47, btPa58, btPa69;
-    
+
     String stHabSelecc = "";
     String stParSelecc = "";
     int iHabSelecc;
     int iParSelecc;
-    
-    double[] maximoHabitaciones = {0,0,0,0,0,0,0,0,0};
-    double[] nivelEstimado = {0,0,0,0,0,0,0,0,0};
-    String[] veredicto = {"","","","","","","","",""};
-    
-    public JPanel Titulo(){
-        
+
+    double[] maximoHabitaciones = {0, 0, 0, 0, 0, 0, 0, 0, 0};
+    double[] nivelEstimado = {0, 0, 0, 0, 0, 0, 0, 0, 0};
+    String[] veredicto = {"", "", "", "", "", "", "", "", ""};
+
+    public JPanel Titulo() {
+
         JPanel Panel = new JPanel();
         Panel.setLayout(null);
         Panel.setBounds(0, 0, 650, 400);
-        
+
         lbTitulo = new JLabel();
         lbTitulo.setText("Habitabilidad App: Acústica");
-        lbTitulo.setBounds(190,0,650,40);
+        lbTitulo.setBounds(190, 0, 650, 40);
         lbTitulo.setVisible(true);
         lbTitulo.setFont(new java.awt.Font("Cambria", 2, 32));
         Panel.add(lbTitulo);
-        
+
         return Panel;
     }
-    
-    public JPanel Habitaciones(){
-        
+
+    public JPanel Habitaciones() {
+
         JPanel Panel = new JPanel();
         Panel.setLayout(null);
         Panel.setBounds(40, 40, 650, 400);
-        
+
         hab1 = new Habitacion("1");
         hab2 = new Habitacion("2");
         hab3 = new Habitacion("3");
@@ -76,141 +76,141 @@ public class CreadorBotones implements ActionListener{
         hab7 = new Habitacion("7");
         hab8 = new Habitacion("8");
         hab9 = new Habitacion("9");
-        
-        pa12 = new Pared(1,2);
+
+        pa12 = new Pared(1, 2);
         btPa12 = pa12.getBoton();
-        btPa12.setBounds(200,20,45,100);
+        btPa12.setBounds(200, 20, 45, 100);
         btPa12.setVisible(true);
         btPa12.addActionListener(this);
         Panel.add(btPa12);
-        
+
         System.out.println(pa12.getMaterial());
-        
-        pa23 = new Pared(2,3);
+
+        pa23 = new Pared(2, 3);
         btPa23 = pa23.getBoton();
-        btPa23.setBounds(425,20,45,100);
+        btPa23.setBounds(425, 20, 45, 100);
         btPa23.setVisible(true);
         btPa23.addActionListener(this);
         Panel.add(btPa23);
-        
-        pa45 = new Pared(4,5);
+
+        pa45 = new Pared(4, 5);
         btPa45 = pa45.getBoton();
-        btPa45.setBounds(200,155,45,100);
+        btPa45.setBounds(200, 155, 45, 100);
         btPa45.setVisible(true);
         btPa45.addActionListener(this);
         Panel.add(btPa45);
-        
-        pa56 = new Pared(5,6);
+
+        pa56 = new Pared(5, 6);
         btPa56 = pa56.getBoton();
-        btPa56.setBounds(425,155,45,100);
+        btPa56.setBounds(425, 155, 45, 100);
         btPa56.setVisible(true);
         btPa56.addActionListener(this);
         Panel.add(btPa56);
-        
-        pa78 = new Pared(7,8);
+
+        pa78 = new Pared(7, 8);
         btPa78 = pa78.getBoton();
-        btPa78.setBounds(200,290,45,100);
+        btPa78.setBounds(200, 290, 45, 100);
         btPa78.setVisible(true);
         btPa78.addActionListener(this);
         Panel.add(btPa78);
-        
-        pa89 = new Pared(8,9);
+
+        pa89 = new Pared(8, 9);
         btPa89 = pa89.getBoton();
-        btPa89.setBounds(425,290,45,100);
+        btPa89.setBounds(425, 290, 45, 100);
         btPa89.setVisible(true);
         btPa89.addActionListener(this);
         Panel.add(btPa89);
-        
-        pa14 = new Pared(1,4);
+
+        pa14 = new Pared(1, 4);
         btPa14 = pa14.getBoton();
-        btPa14.setBounds(25,125,170,25);
+        btPa14.setBounds(25, 125, 170, 25);
         btPa14.setVisible(true);
         btPa14.addActionListener(this);
         Panel.add(btPa14);
-        
-        pa25 = new Pared(2,5);
+
+        pa25 = new Pared(2, 5);
         btPa25 = pa25.getBoton();
-        btPa25.setBounds(250,125,170,25);
+        btPa25.setBounds(250, 125, 170, 25);
         btPa25.setVisible(true);
         btPa25.addActionListener(this);
         Panel.add(btPa25);
-        
-        pa36 = new Pared(3,6);
+
+        pa36 = new Pared(3, 6);
         btPa36 = pa36.getBoton();
-        btPa36.setBounds(475,125,170,25);
+        btPa36.setBounds(475, 125, 170, 25);
         btPa36.setVisible(true);
         btPa36.addActionListener(this);
         Panel.add(btPa36);
-        
-        pa47 = new Pared(4,7);
+
+        pa47 = new Pared(4, 7);
         btPa47 = pa47.getBoton();
-        btPa47.setBounds(25,260,170,25);
+        btPa47.setBounds(25, 260, 170, 25);
         btPa47.setVisible(true);
         btPa47.addActionListener(this);
         Panel.add(btPa47);
-        
-        pa58 = new Pared(5,8);
+
+        pa58 = new Pared(5, 8);
         btPa58 = pa58.getBoton();
-        btPa58.setBounds(250,260,170,25);
+        btPa58.setBounds(250, 260, 170, 25);
         btPa58.setVisible(true);
         btPa58.addActionListener(this);
         Panel.add(btPa58);
-        
-        pa69 = new Pared(6,9);
+
+        pa69 = new Pared(6, 9);
         btPa69 = pa69.getBoton();
-        btPa69.setBounds(475,260,170,25);
+        btPa69.setBounds(475, 260, 170, 25);
         btPa69.setVisible(true);
         btPa69.addActionListener(this);
         Panel.add(btPa69);
-        
+
         btHabitacion1 = hab1.getBoton();
         btHabitacion1.setBounds(25, 20, 170, 100);
         btHabitacion1.setVisible(true);
         btHabitacion1.addActionListener(this);
         Panel.add(btHabitacion1);
-        
+
         btHabitacion2 = hab2.getBoton();
         btHabitacion2.setBounds(250, 20, 170, 100);
         btHabitacion2.setVisible(true);
         btHabitacion2.addActionListener(this);
         Panel.add(btHabitacion2);
-        
+
         btHabitacion3 = hab3.getBoton();
         btHabitacion3.setBounds(475, 20, 170, 100);
         btHabitacion3.setVisible(true);
         btHabitacion3.addActionListener(this);
         Panel.add(btHabitacion3);
-        
+
         btHabitacion4 = hab4.getBoton();
         btHabitacion4.setBounds(25, 155, 170, 100);
         btHabitacion4.setVisible(true);
         btHabitacion4.addActionListener(this);
         Panel.add(btHabitacion4);
-        
+
         btHabitacion5 = hab5.getBoton();
         btHabitacion5.setBounds(250, 155, 170, 100);
         btHabitacion5.setVisible(true);
         btHabitacion5.addActionListener(this);
         Panel.add(btHabitacion5);
-        
+
         btHabitacion6 = hab6.getBoton();
         btHabitacion6.setBounds(475, 155, 170, 100);
         btHabitacion6.setVisible(true);
         btHabitacion6.addActionListener(this);
         Panel.add(btHabitacion6);
-        
+
         btHabitacion7 = hab7.getBoton();
         btHabitacion7.setBounds(25, 290, 170, 100);
         btHabitacion7.setVisible(true);
         btHabitacion7.addActionListener(this);
         Panel.add(btHabitacion7);
-        
+
         btHabitacion8 = hab8.getBoton();
         btHabitacion8.setBounds(250, 290, 170, 100);
         btHabitacion8.setVisible(true);
         btHabitacion8.addActionListener(this);
         Panel.add(btHabitacion8);
-        
+
         btHabitacion9 = hab9.getBoton();
         btHabitacion9.setBounds(475, 290, 170, 100);
         btHabitacion9.setVisible(true);
@@ -219,15 +219,15 @@ public class CreadorBotones implements ActionListener{
 
         return Panel;
     }
-    
-    public JPanel Usos(){
+
+    public JPanel Usos() {
         JPanel Panel = new JPanel();
         Panel.setLayout(null);
         Panel.setBounds(700, 51, 250, 120);
-        Panel.setBorder(javax.swing.BorderFactory.createTitledBorder(new EtchedBorder(Color.darkGray,null), "Habitacion seleccionada", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Cambria", 2, 16), new java.awt.Color(0, 0, 0)));
+        Panel.setBorder(javax.swing.BorderFactory.createTitledBorder(new EtchedBorder(Color.darkGray, null), "Habitacion seleccionada", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Cambria", 2, 16), new java.awt.Color(0, 0, 0)));
 
         tipoEspacio = new JComboBox();
-        tipoEspacio.setBounds(25, 25, 200, 20);     
+        tipoEspacio.setBounds(25, 25, 200, 20);
         tipoEspacio.addItem("Sin uso");
         tipoEspacio.addItem("Biblioteca");
         tipoEspacio.addItem("Dormitorio");
@@ -239,7 +239,7 @@ public class CreadorBotones implements ActionListener{
         tipoEspacio.addItem("Oficina de negocios");
         tipoEspacio.setVisible(true);
         Panel.add(tipoEspacio);
-        
+
         btAplicarUso = new JButton("Aplicar");
         btAplicarUso.setBounds(75, 55, 100, 50);
         btAplicarUso.setVisible(true);
@@ -248,15 +248,14 @@ public class CreadorBotones implements ActionListener{
 
         return Panel;
     }
-    
-    public JPanel UsosParedes(){
+
+    public JPanel UsosParedes() {
         JPanel Panel = new JPanel();
         Panel.setLayout(null);
         Panel.setBounds(700, 186, 250, 120);
-        
-        Panel.setBorder(javax.swing.BorderFactory.createTitledBorder(new EtchedBorder(Color.darkGray,null), "Pared seleccionada", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Cambria", 2, 16), new java.awt.Color(0, 0, 0)));
-        
-        
+
+        Panel.setBorder(javax.swing.BorderFactory.createTitledBorder(new EtchedBorder(Color.darkGray, null), "Pared seleccionada", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Cambria", 2, 16), new java.awt.Color(0, 0, 0)));
+
         tipoPared = new JComboBox();
         tipoPared.setBounds(25, 25, 200, 20);
         tipoPared.addItem("Hormigon");
@@ -264,25 +263,24 @@ public class CreadorBotones implements ActionListener{
         tipoPared.addItem("Ladrillo");
         tipoPared.setVisible(true);
         Panel.add(tipoPared);
-        
+
         btAplicarPared = new JButton("Aplicar");
         btAplicarPared.setBounds(75, 55, 100, 50);
         btAplicarPared.setVisible(true);
         btAplicarPared.addActionListener(this);
         Panel.add(btAplicarPared);
-        
+
         return Panel;
     }
-    
-    public JPanel TablaUsos(){
+
+    public JPanel TablaUsos() {
         JPanel Panel = new JPanel();
         Panel.setLayout(null);
         Panel.setBounds(60, 450, 627, 210);
         Panel.setFont(new java.awt.Font("Cambria", 2, 11));
-        Panel.setBorder(javax.swing.BorderFactory.createTitledBorder(new EtchedBorder(Color.darkGray,null), "Informacion por habitacion", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Cambria", 2, 16), new java.awt.Color(0, 0, 0)));
-        
+        Panel.setBorder(javax.swing.BorderFactory.createTitledBorder(new EtchedBorder(Color.darkGray, null), "Informacion por habitacion", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Cambria", 2, 16), new java.awt.Color(0, 0, 0)));
+
         //Panel.setBorder(javax.swing.BorderFactory.createTitledBorder("Información por habitacion"));
-        
         model = new DefaultTableModel();
         tbHabitacionesUsos = new JTable();
         tbHabitacionesUsos.setModel(model);
@@ -301,130 +299,129 @@ public class CreadorBotones implements ActionListener{
         model.addRow(new Object[]{hab7.getStNombreHabitacion(), hab7.getUso(), hab7.getPromedioOrigen(), maximoHabitaciones[6], nivelEstimado[6]});
         model.addRow(new Object[]{hab8.getStNombreHabitacion(), hab8.getUso(), hab8.getPromedioOrigen(), maximoHabitaciones[7], nivelEstimado[7]});
         model.addRow(new Object[]{hab9.getStNombreHabitacion(), hab9.getUso(), hab9.getPromedioOrigen(), maximoHabitaciones[8], nivelEstimado[8]});
-        
+
         tbHabitacionesUsos.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         tbHabitacionesUsos.getTableHeader().setReorderingAllowed(false);
-        
+
         tbHabitacionesUsos.setBounds(30, 30, 570, 160);
         tbHabitacionesUsos.setVisible(true);
         Panel.add(tbHabitacionesUsos);
-        
+
         return Panel;
     }
-    
-    public JPanel Marcas(){
+
+    public JPanel Marcas() {
         JPanel Panel = new JPanel();
         Panel.setLayout(null);
         Panel.setBounds(85, 635, 900, 210);
         //Panel.setFont(new java.awt.Font("Cambria", 2, 11));
         //Panel.setBorder(javax.swing.BorderFactory.createTitledBorder(new EtchedBorder(Color.darkGray,null), "Informacion por habitacion", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Cambria", 2, 16), new java.awt.Color(0, 0, 0)));
-        
+
         lbNombres = new JLabel();
         lbNombres.setText("Mateo Yate Gonzalez - Sebastian Gonzalez Mendoza - Brayan Paredes Sanchez");
-        lbNombres.setBounds(90,25,900,40);
+        lbNombres.setBounds(90, 25, 900, 40);
         lbNombres.setVisible(true);
         lbNombres.setFont(new java.awt.Font("Cambria", 2, 20));
         Panel.add(lbNombres);
-        
-        
+
         return Panel;
     }
-    
-    public JPanel Imagen(){
+
+    public JPanel Imagen() {
         JPanel Panel = new JPanel();
         Panel.setLayout(null);
         Panel.setBounds(700, 450, 350, 150);
-        
+
         lbImagen = new JLabel();
         lbImagen.setText("LABEL");
-        lbImagen.setBounds(35,0,200,200);
+        lbImagen.setBounds(35, 0, 200, 200);
         lbImagen.setVisible(true);
         //lbImagen.setFont(new java.awt.Font("Cambria", 2, 20));
-        lbImagen.setIcon(iconoEscalado("./imagenes/imagen.png",200));
-        
+        lbImagen.setIcon(iconoEscalado("./imagenes/imagen.png", 200));
+
         //btEscudo6.setIcon(iconoEscalado("./escudos/6.png",90));
         Panel.add(lbImagen);
-        
+
         return Panel;
-        
+
     }
-    
-    public JPanel Habitabilidad(){
+
+    public JPanel Habitabilidad() {
         JPanel Panel = new JPanel();
         Panel.setLayout(null);
         Panel.setBounds(700, 350, 350, 100);
-        
+
         btEnviarHabitabilidad = new JButton("Calcular habitabilidad");
-        
+
         btEnviarHabitabilidad.setBounds(25, 0, 200, 50);
         btEnviarHabitabilidad.setVisible(true);
         btEnviarHabitabilidad.addActionListener(this);
         Panel.add(btEnviarHabitabilidad);
-        
+
         return Panel;
     }
-    
+
     @Override
     public void actionPerformed(ActionEvent e) {
         int op;
-        if(e.getSource()==btHabitacion1){
+        if (e.getSource() == btHabitacion1) {
             stHabSelecc = "1";
             iHabSelecc = 1;
             //lbHab.setText("Uso de habitacion " + stHabSelecc);
         }
-        
-        if(e.getSource()==btHabitacion2){
+
+        if (e.getSource() == btHabitacion2) {
             stHabSelecc = "2";
             iHabSelecc = 2;
             //lbHab.setText("Uso de habitacion " + stHabSelecc);
         }
-        
-        if(e.getSource()==btHabitacion3){
+
+        if (e.getSource() == btHabitacion3) {
             stHabSelecc = "3";
             iHabSelecc = 3;
             //lbHab.setText("Uso de habitacion " + stHabSelecc);
         }
-        
-        if(e.getSource()==btHabitacion4){
+
+        if (e.getSource() == btHabitacion4) {
             stHabSelecc = "4";
             iHabSelecc = 4;
             //lbHab.setText("Uso de habitacion " + stHabSelecc);
         }
-        
-        if(e.getSource()==btHabitacion5){
+
+        if (e.getSource() == btHabitacion5) {
             stHabSelecc = "5";
             iHabSelecc = 5;
             //lbHab.setText("Uso de habitacion " + stHabSelecc);
         }
-        
-        if(e.getSource()==btHabitacion6){
+
+        if (e.getSource() == btHabitacion6) {
             stHabSelecc = "6";
             iHabSelecc = 6;
             //lbHab.setText("Uso de habitacion " + stHabSelecc);
         }
-        
-        if(e.getSource()==btHabitacion7){
+
+        if (e.getSource() == btHabitacion7) {
             stHabSelecc = "7";
             iHabSelecc = 7;
             //lbHab.setText("Uso de habitacion " + stHabSelecc);
         }
-        
-        if(e.getSource()==btHabitacion8){
+
+        if (e.getSource() == btHabitacion8) {
             stHabSelecc = "8";
             iHabSelecc = 8;
             //lbHab.setText("Uso de habitacion " + stHabSelecc);
         }
-        
-        if(e.getSource()==btHabitacion9){
+
+        if (e.getSource() == btHabitacion9) {
             stHabSelecc = "9";
             iHabSelecc = 9;
             //lbHab.setText("Uso de habitacion " + stHabSelecc);
         }
-        
-        if (e.getSource()==btAplicarUso){
+
+        if (e.getSource() == btAplicarUso) {
             System.out.println("Boton aplicar presionado, opcion: " + iHabSelecc);
             op = iHabSelecc;
-            switch(op){
+            switch (op) {
                 case 1:
                     hab1.setUso(tipoEspacio.getSelectedItem().toString());
                     hab1.establecerPromedio();
@@ -508,84 +505,84 @@ public class CreadorBotones implements ActionListener{
                     break;
             }
         }
-        
-        if(e.getSource()==btPa12){
+
+        if (e.getSource() == btPa12) {
             stHabSelecc = "1-2";
             iParSelecc = 12;
             lbPar.setText("Material de la pared: " + stHabSelecc);
         }
-        
-        if(e.getSource()==btPa14){
+
+        if (e.getSource() == btPa14) {
             stHabSelecc = "1-4";
             iParSelecc = 14;
             lbPar.setText("Material de la pared: " + stHabSelecc);
         }
-        
-        if(e.getSource()==btPa23){
+
+        if (e.getSource() == btPa23) {
             stHabSelecc = "2-3";
             iParSelecc = 23;
             lbPar.setText("Material de la pared: " + stHabSelecc);
         }
-        
-        if(e.getSource()==btPa25){
+
+        if (e.getSource() == btPa25) {
             stHabSelecc = "2-5";
             iParSelecc = 25;
             lbPar.setText("Material de la pared: " + stHabSelecc);
         }
-        
-        if(e.getSource()==btPa36){
+
+        if (e.getSource() == btPa36) {
             stHabSelecc = "3-6";
             iParSelecc = 36;
             lbPar.setText("Material de la pared: " + stHabSelecc);
         }
-        
-        if(e.getSource()==btPa45){
+
+        if (e.getSource() == btPa45) {
             stHabSelecc = "4-5";
             iParSelecc = 45;
             lbPar.setText("Material de la pared: " + stHabSelecc);
         }
-        
-        if(e.getSource()==btPa47){
+
+        if (e.getSource() == btPa47) {
             stHabSelecc = "4-7";
             iParSelecc = 47;
             lbPar.setText("Material de la pared: " + stHabSelecc);
         }
-        
-        if(e.getSource()==btPa56){
+
+        if (e.getSource() == btPa56) {
             stHabSelecc = "5-6";
             iParSelecc = 56;
             lbPar.setText("Material de la pared: " + stHabSelecc);
         }
-        
-        if(e.getSource()==btPa58){
+
+        if (e.getSource() == btPa58) {
             stHabSelecc = "5-8";
             iParSelecc = 58;
             lbPar.setText("Material de la pared: " + stHabSelecc);
         }
-        
-        if(e.getSource()==btPa69){
+
+        if (e.getSource() == btPa69) {
             stHabSelecc = "6-9";
             iParSelecc = 69;
             lbPar.setText("Material de la pared: " + stHabSelecc);
         }
-        
-        if(e.getSource()==btPa78){
+
+        if (e.getSource() == btPa78) {
             stHabSelecc = "7-8";
             iParSelecc = 78;
             lbPar.setText("Material de la pared: " + stHabSelecc);
         }
-        
-        if(e.getSource()==btPa89){
+
+        if (e.getSource() == btPa89) {
             stHabSelecc = "8-9";
             iParSelecc = 89;
             lbPar.setText("Material de la pared: " + stHabSelecc);
         }
-        
-        if (e.getSource()==btAplicarPared){
+
+        if (e.getSource() == btAplicarPared) {
             System.out.println("Boton aplicar a la pared presionado, opcion: " + iParSelecc);
             String materialSeleccionado = tipoPared.getSelectedItem().toString();
             Color c = Color.white;
-            switch(materialSeleccionado){
+            switch (materialSeleccionado) {
                 case "Hormigon":
                     c = new Color(104, 108, 94);
                     break;
@@ -596,9 +593,9 @@ public class CreadorBotones implements ActionListener{
                     c = new Color(197, 66, 36);
                     break;
             }
-            
+
             op = iParSelecc;
-            switch(op){
+            switch (op) {
                 case 12:
                     pa12.setMaterial(materialSeleccionado);
                     btPa12.setBackground(c);
@@ -661,91 +658,91 @@ public class CreadorBotones implements ActionListener{
                     break;
             }
         }
-        
-        if (e.getSource()==btEnviarHabitabilidad){
+
+        if (e.getSource() == btEnviarHabitabilidad) {
             Habitabilidad evHab = new Habitabilidad(hab1, hab2, hab3, hab4, hab5, hab6, hab7, hab8, hab9, pa12, pa23, pa45, pa56, pa78, pa89, pa14, pa25, pa36, pa47, pa58, pa69);
             evHab.destacarOrigen();
-            
+
             nivelEstimado = evHab.getArrayFinal();
             veredicto = evHab.getArrayVeredicto();
-            
+
             pintarHabitables();
             mostrarEstimado();
-            
-        }   
+
+        }
     }
-    
-    public void pintarHabitables(){
-        
-        if (veredicto[0].equals("Es habitable")){
+
+    public void pintarHabitables() {
+
+        if (veredicto[0].equals("Es habitable")) {
             btHabitacion1.setBackground(Color.GREEN);
         } else {
             btHabitacion1.setBackground(Color.red);
         }
-        
-        if (veredicto[1].equals("Es habitable")){
+
+        if (veredicto[1].equals("Es habitable")) {
             btHabitacion2.setBackground(Color.GREEN);
         } else {
             btHabitacion2.setBackground(Color.red);
         }
-        
-        if (veredicto[2].equals("Es habitable")){
+
+        if (veredicto[2].equals("Es habitable")) {
             btHabitacion3.setBackground(Color.GREEN);
         } else {
             btHabitacion3.setBackground(Color.red);
         }
-        
-        if (veredicto[3].equals("Es habitable")){
+
+        if (veredicto[3].equals("Es habitable")) {
             btHabitacion4.setBackground(Color.GREEN);
         } else {
             btHabitacion4.setBackground(Color.red);
         }
-        
-        if (veredicto[4].equals("Es habitable")){
+
+        if (veredicto[4].equals("Es habitable")) {
             btHabitacion5.setBackground(Color.GREEN);
         } else {
             btHabitacion5.setBackground(Color.red);
         }
-        
-        if (veredicto[5].equals("Es habitable")){
+
+        if (veredicto[5].equals("Es habitable")) {
             btHabitacion6.setBackground(Color.GREEN);
         } else {
             btHabitacion6.setBackground(Color.red);
         }
-        
-        if (veredicto[6].equals("Es habitable")){
+
+        if (veredicto[6].equals("Es habitable")) {
             btHabitacion7.setBackground(Color.GREEN);
         } else {
             btHabitacion7.setBackground(Color.red);
         }
-        
-        if (veredicto[7].equals("Es habitable")){
+
+        if (veredicto[7].equals("Es habitable")) {
             btHabitacion8.setBackground(Color.GREEN);
         } else {
             btHabitacion8.setBackground(Color.red);
         }
-        
-        if (veredicto[8].equals("Es habitable")){
+
+        if (veredicto[8].equals("Es habitable")) {
             btHabitacion9.setBackground(Color.GREEN);
         } else {
             btHabitacion9.setBackground(Color.red);
         }
     }
-    
-    public void mostrarEstimado(){
-        
-        for (int i=0;i<9;i++){
-            tbHabitacionesUsos.setValueAt(nivelEstimado[i], i+1, 4);
+
+    public void mostrarEstimado() {
+
+        for (int i = 0; i < 9; i++) {
+            tbHabitacionesUsos.setValueAt(nivelEstimado[i], i + 1, 4);
         }
-        
-        
+
     }
-    
-    public ImageIcon iconoEscalado(String s, int k){
+
+    public ImageIcon iconoEscalado(String s, int k) {
         ImageIcon iconoOriginal = new ImageIcon(s);
         int ancho = k;
         int alto = -1;
         ImageIcon iconoEscala = new ImageIcon(iconoOriginal.getImage().getScaledInstance(ancho, alto, java.awt.Image.SCALE_DEFAULT));
         return iconoEscala;
-    };
+    }
+;
 }

@@ -1,6 +1,5 @@
 package Modelo;
 
-
 import javax.swing.JButton;
 
 /*
@@ -8,18 +7,16 @@ import javax.swing.JButton;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
  *
  * @author Usuario
  */
 public class Habitacion {
-    
-    
+
     public boolean activa;
     public float promedioOrigen;
     public float ruidoMax;
-    
+
     public String uso;
     public JButton boton;
     public String stNombreHabitacion;
@@ -51,7 +48,7 @@ public class Habitacion {
     public void setStNombreHabitacion(String stNombreHabitacion) {
         this.stNombreHabitacion = stNombreHabitacion;
     }
-    
+
     public void setUso(String uso) {
         this.uso = uso;
     }
@@ -67,9 +64,7 @@ public class Habitacion {
     public float getRuidoMax() {
         return ruidoMax;
     }
-    
-    
-    
+
     public JButton getBoton() {
         return boton;
     }
@@ -81,7 +76,7 @@ public class Habitacion {
     public String getUso() {
         return uso;
     }
-    
+
     public void establecerUso(String s) {
         this.uso = s;
     }
@@ -113,7 +108,7 @@ public class Habitacion {
                 case "Sala":
                     this.promedioOrigen = 40;
                     break;
-                
+
                 //Empresarial y de Ocio
                 case "Oficina":
                     this.promedioOrigen = 40;
@@ -127,8 +122,8 @@ public class Habitacion {
             }
         }
     }
-    
-    public void establecerMaximo(){
+
+    public void establecerMaximo() {
         String op = this.uso;
         switch (op) {
             //Residencial

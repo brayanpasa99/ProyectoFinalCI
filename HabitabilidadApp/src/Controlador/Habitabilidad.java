@@ -204,7 +204,7 @@ public class Habitabilidad {
     public double[] getArrayFinal() {
         return arrayFinal;
     }
-    
+
     public double energiaTransmitida(double TL, double ruidoOrigen) {
 
         if (TL == 0) {
@@ -320,7 +320,7 @@ public class Habitabilidad {
     public double[] arrayFinal = {0, 0, 0, 0, 0, 0, 0, 0, 0};
 
     public void sumarDecibeles() {
-        
+
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
                 if (matrizAdyacencia[i][j] != 0.0) {
@@ -349,8 +349,8 @@ public class Habitabilidad {
         }
 
         System.out.println("");
-        
-        double aux=0;
+
+        double aux = 0;
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
                 aux = aux + matrizIntensidadSonora[i][j];
@@ -376,8 +376,6 @@ public class Habitabilidad {
         for (int i = 0; i < 9; i++) {
             System.out.print(arrayFinal[i] + " ");
         }
-        
-        
 
     }
 
