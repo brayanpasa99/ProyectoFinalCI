@@ -17,6 +17,9 @@ public class Principal {
         JPanel PaUsosParedes = creadorBotones.UsosParedes();
         JPanel PaTabla = creadorBotones.TablaUsos();
         JPanel PaHabitabilidad = creadorBotones.Habitabilidad();
+        JPanel PaTitulo = creadorBotones.Titulo();
+        JPanel PaMarca = creadorBotones.Marcas();
+        JPanel PaImagen = creadorBotones.Imagen();
         
         ventana = new JFrame("");
 
@@ -26,6 +29,9 @@ public class Principal {
         ventana.add(PaUsosParedes);
         ventana.add(PaTabla);
         ventana.add(PaHabitabilidad);
+        ventana.add(PaTitulo);
+        ventana.add(PaMarca);
+        ventana.add(PaImagen);
         
         //Se definen las propiedades de la ventana
         ventana.setSize(1000,750);
